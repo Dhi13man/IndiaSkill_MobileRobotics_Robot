@@ -32,7 +32,7 @@ The Robot's Hardware components associated with the project includes:
 
    2. **bluetooth_interface.cpp**: Contains a `BluetoothInterface` Class that interfaces with the HC05 Hardware to communicate using Bluetooth HC05 Module to send and recieve Serial messages.
 
-   3. **motordriver_interfaces.cpp**: Contains a `MotorDriverInterface` Class Template that is extended by specific Motor Driver classes like `L298Interface` to interface with the H-Bridge Hardware, to control the motors.
+   3. **motordriver_interfaces.cpp**: Contains a `MotorDriverInterface` Class Template that is extended by specific Motor Driver classes like `L298NInterface` to interface with the H-Bridge Hardware, to control the motors.
 
 3. **controllers**: Folder containing all the controllers responsible for controlling the robot (the brains of the operation).
    1. **autonomous_controller.cpp**: Contains a `AutonomousController` Class that uses a `FourWheelDriveInterface` Class Object to run the robot in autonomous mode for a specific autonomous round of the competition.

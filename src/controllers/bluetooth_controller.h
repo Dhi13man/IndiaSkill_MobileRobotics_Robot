@@ -1,9 +1,9 @@
-#include "..\interfaces\bluetooth_interface.cpp"
-#include "..\interfaces\4wheel_drive_interface.cpp"
+#include "..\interfaces\bluetooth_interface.h"
+#include "..\interfaces\4wheel_drive_interface.h"
 
 // <summary>
-/// @file bluetooth_interface.cpp
-/// @brief This file contains the BluetoothInterface class.
+/// @file bluetooth_controller.cpp
+/// @brief This file contains the BluetoothController class.
 /// @author Dhiman Seal
 /// @version 1.0
 /// @date 2021-09-14
@@ -11,8 +11,8 @@
 /// @class BluetoothController
 /// @brief This class is used to control the Robot via Bluetooth.
 ///
-/// @details The Robot is controlled according to the messages received by the [BlueToothInterface]
-/// using the [FourWheelDriveInterface] class to control the motors.
+/// @details BluetoothController facilitates the control of the Robot according to the messages
+/// received by the [BlueToothInterface], using the [FourWheelDriveInterface] class to control the motors.
 class BluetoothController {
 private:
     BluetoothInterface* bluetooth;
@@ -29,16 +29,17 @@ public:
     BluetoothController(BluetoothInterface* bluetooth, FourWheelDriveInterface* fourWheelDrive) {
         this->bluetooth = bluetooth;
         this->fourWheelDrive = fourWheelDrive;
-
+        
+        // Check if interfaces are initialized and ready.
         if (this->bluetooth->getStatus() != "Ready") {
             const String error = "Bluetooth is not ready. Status: ";
             Serial.println(error);
-            throw error;
+            // throw error;
         }
         if (this->fourWheelDrive->getStatus() != "Ready") {
             const String error = "4WheelDrive System is not ready";
             Serial.println(error);
-            throw error;
+            // throw error;
         }
         status = "Ready";
     }

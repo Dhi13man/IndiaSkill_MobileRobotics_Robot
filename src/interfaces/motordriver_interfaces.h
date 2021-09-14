@@ -7,7 +7,6 @@
 /// @version 1.0
 /// @date 2021-09-14
 
-
 /// Template class for all motor driver based Classes.
 class MotorDriverInterface {
 protected:
@@ -16,30 +15,30 @@ protected:
 public:
     /// MOVEMENT FUNCTION --> Left
     /// @param speed Speed of the right motor. Range: 0-255. Default: 255
-    virtual void smoothLeft(int speed);
+    virtual void smoothLeft(int speed) { }
 
     /// MOVEMENT FUNCTIONS --> Right
     /// @param speed Speed of the left motor. Range: 0-255. Default: 255
-    virtual void smoothRight(int speed);
+    virtual void smoothRight(int speed) { }
 
     /// MOVEMENT FUNCTIONS --> On-Spot Left
     /// @param speed Speed of the right motor forward and left motor reversed. Range: 0-255. Default: 255
-    virtual void hardLeft(int speed);
+    virtual void hardLeft(int speed) { }
 
     /// MOVEMENT FUNCTIONS --> On-Spot Right
     /// @param speed Speed of the left motor forward and right motor reversed. Range: 0-255. Default: 255
-    virtual void hardRight(int speed);
+    virtual void hardRight(int speed) { }
 
     /// MOVEMENT FUNCTIONS --> Forward
     /// @param speed Speed of both motors. Range: 0-255. Default: 255
-    virtual void forward(int speed);
+    virtual void forward(int speed) { }
     
     /// MOVEMENT FUNCTIONS --> Backward
     /// @param speed Speed of both motors in reverse. Range: 0-255. Default: 255
-    virtual void backward(int speed);
+    virtual void backward(int speed) { }
 
     /// MOVEMENT FUNCTIONS --> Stop
-    virtual void stop();
+    virtual void stop() { }
 
     /// GETTER FUNCTION --> Status
     /// @return [String] status of the Motor Driver.
@@ -51,27 +50,27 @@ public:
 };
 
 
-/// @class L298Interface
+/// @class L298NInterface
 /// @brief Class that is solely responsible for controlling a L298N Motor driver.
 ///
 /// @details Initialize with [leftForwardPin, leftBackwardPin, rightForwardPin, rightBackwardPin]
 /// [enableLeftPin, enableRightPin] are optional for speed control.
-class L298Interface : public MotorDriverInterface {
+class L298NInterface : public MotorDriverInterface {
 private:
     int lmf, lmb, rmf, rmb;
 
     int enl, enr;
 
 public:
-    /// @brief Constuctor initializing the [L298Interface].
+    /// @brief Constuctor initializing the [L298NInterface].
     /// @param leftForwardPin Pin for left motor forward direction
     /// @param leftBackwardPin Pin for left motor backward direction
     /// @param rightForwardPin Pin for right motor forward direction
     /// @param rightBackwardPin Pin for right motor backward direction
     /// @param enableLeftPin Pin for left motor speed control.
     /// @param enableRightPin Pin for right motor speed control.
-    /// @return [L298Interface] object
-    L298Interface(
+    /// @return [L298NInterface] object
+    L298NInterface(
         int leftForwardPin = 10,
         int leftBackwardPin = 9,
         int rightForwardPin = 8,

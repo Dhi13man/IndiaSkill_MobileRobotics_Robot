@@ -1,4 +1,5 @@
-#include "motordriver_interfaces.cpp"
+#pragma once
+#include "motordriver_interfaces.h"
 
 /// <summary>
 /// @file 4wheel_drive_interface.cpp
