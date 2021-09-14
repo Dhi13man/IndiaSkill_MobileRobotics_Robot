@@ -1,15 +1,15 @@
 #include <Arduino.h>
 
 /// <summary>
-/// @file motordriver_controller.cpp
-/// @brief Motor driver controller
+/// @file motordriver_interface.cpp
+/// @brief Motor driver Interfaces
 /// @author Dhiman Seal
 /// @version 1.0
 /// @date 2021-09-14
 
 
-/// Template class for all motor driver controller Classes.
-class MotorDriverController {
+/// Template class for all motor driver based Classes.
+class MotorDriverInterface {
 protected:
     String status;
 
@@ -51,29 +51,27 @@ public:
 };
 
 
-/// @class L298Controller
+/// @class L298Interface
 /// @brief Class that is solely responsible for controlling a L298N Motor driver.
 ///
 /// @details Initialize with [leftForwardPin, leftBackwardPin, rightForwardPin, rightBackwardPin]
 /// [enableLeftPin, enableRightPin] are optional for speed control.
-class L298Controller : public MotorDriverController {
+class L298Interface : public MotorDriverInterface {
 private:
     int lmf, lmb, rmf, rmb;
 
     int enl, enr;
 
-    String status;
-
 public:
-    /// @brief Constuctor initializing the L298Controller.
+    /// @brief Constuctor initializing the [L298Interface].
     /// @param leftForwardPin Pin for left motor forward direction
     /// @param leftBackwardPin Pin for left motor backward direction
     /// @param rightForwardPin Pin for right motor forward direction
     /// @param rightBackwardPin Pin for right motor backward direction
     /// @param enableLeftPin Pin for left motor speed control.
     /// @param enableRightPin Pin for right motor speed control.
-    /// @return L298Controller object
-    L298Controller(
+    /// @return [L298Interface] object
+    L298Interface(
         int leftForwardPin = 10,
         int leftBackwardPin = 9,
         int rightForwardPin = 8,

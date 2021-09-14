@@ -1,6 +1,6 @@
 # IndiaSkill_MobileRobotics_Robot
 
-Advanced Object-Oriented code to run a 4 wheel hybrid autonomous/Bluetooth-Controlled robot to perform tasks given across the various levels of IndiaSkills Mobile Robotics Event, 2021.
+Advanced Object-Oriented code to run a 4 wheel hybrid autonomous/Bluetooth-Serial-Controlled robot to perform tasks given across the various levels of IndiaSkills Mobile Robotics Event, 2021.
 
 ## Hardware Components
 
@@ -16,23 +16,28 @@ The Robot's Hardware components associated with the project includes:
 ## Project Structure
 
 - **main.cpp**
+- **interfaces**
+  - **4wheel_drive_interface.cpp**
+  - **bluetooth_interface.cpp**
+  - **motordriver_interfaces.cpp**
 - **controllers**
-  - **4wheel_drive_controller.cpp**
-  - **bluetooth_controller.cpp**
-  - **motordriver_controllers.cpp**
   - **autonomous_controller.cpp**
+  - **bluetooth_controller.cpp**
 
 ## Project Details
 
 1. **Main.cpp**: Main file for the project.
-2. **controllers**: Folder containing all the controllers interfacing with the hardware.
-   1. **4wheel_drive_controller.cpp**: Contains a `FourWheelDriveController` Class which uses 2 `MotorDriverController` Class (defined in `motordriver_controllers.cpp`) objects to run the 4 wheeled bot as needed.
+2. **interfaces**: Folder containing all the interfaces interfacing with the hardware.
+   1. **4wheel_drive_interface.cpp**: Contains a `FourWheelDriveInterface` Class which uses 2 `MotorDriverInterface` Class (defined in `motordriver_interfaces.cpp`) objects to run the 4 wheeled bot as needed.
 
-   2. **bluetooth_controller.cpp**: Contains a `BluetoothController` Class that interfaces with the HC05 Hardware to communicate using Bluetooth and control the robot using the Four Wheel Drive Controller (`FourWheelDriveController` Class Object defined in `4wheel_drive_controller.cpp`).
+   2. **bluetooth_interface.cpp**: Contains a `BluetoothInterface` Class that interfaces with the HC05 Hardware to communicate using Bluetooth HC05 Module to send and recieve Serial messages.
 
-   3. **motordriver_controllers.cpp**: Contains a `MotorDriverController` Class Template that is extended by specific Motor Driver classes like `L298Controller` to interface with the H-Bridge Hardware, to control the motors.
+   3. **motordriver_interfaces.cpp**: Contains a `MotorDriverInterface` Class Template that is extended by specific Motor Driver classes like `L298Interface` to interface with the H-Bridge Hardware, to control the motors.
 
-   4. **autonomous_controller.cpp**: `AutonomousController` Class uses the `FourWheelDriveController` Class Object to run the robot in autonomous mode for a specific autonomous round of the competition.
+3. **controllers**: Folder containing all the controllers responsible for controlling the robot (the brains of the operation).
+   1. **autonomous_controller.cpp**: Contains a `AutonomousController` Class that uses a `FourWheelDriveInterface` Class Object to run the robot in autonomous mode for a specific autonomous round of the competition.
+
+   2. **bluetooth_controller.cpp:** Contains a `BluetoothController` Class that uses the `BluetoothInterface` Class object to communicate using Bluetooth and control the robot using a Four Wheel Drive Interface (`FourWheelDriveInterface` defined in `4wheel_drive_interface.cpp`) Class Object.
 
 ## Project Dependencies
 

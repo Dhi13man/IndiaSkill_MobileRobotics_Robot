@@ -1,29 +1,29 @@
-#include "motordriver_controllers.cpp"
+#include "motordriver_interfaces.cpp"
 
 /// <summary>
-/// @file 4wheel_drive_controller.cpp
-/// @brief This file contains the 4wheel_drive_controller class.
+/// @file 4wheel_drive_interface.cpp
+/// @brief This file contains the [FourWheelDriveInterface] class.
 /// @author Dhiman Seal
 /// @version 1.0
 /// @date 2021-09-14
 
-/// @class FourWheelDriveController
+/// @class FourWheelDriveInterface
 /// @brief This class is used to control the 4 wheel drive robot being controlled using 2 L298 Motor Drivers.
 ///
 /// @details Initialized with [frontMotorDriver, backMotorDriver] that control the 2 wheels on the front and
 /// the two wheels on the back of the robot respectively.
-class FourWheelDriveController {
+class FourWheelDriveInterface {
 private:
-    MotorDriverController *frontDriver, *backDriver;
+    MotorDriverInterface *frontDriver, *backDriver;
 
     String status;
 
 public:
-    /// @brief Constuctor initializing the FourWheelDriveController.
-    /// @param frontMotorDriver L298Controller object that is meant to control the front wheels of the robot.
-    /// @param backMotorDriver L298Controller object that is meant to control the back wheels of the robot.
-    /// @return L298Controller object
-    FourWheelDriveController(MotorDriverController *frontMotorDriver, MotorDriverController *backMotorDriver) {
+    /// @brief Constuctor initializing the [FourWheelDriveInterface] Class.
+    /// @param frontMotorDriver [MotorDriverInterface] object that is meant to control the front wheels of the robot.
+    /// @param backMotorDriver [MotorDriverInterface] object that is meant to control the back wheels of the robot.
+    /// @return [FourWheelDriveInterface] object
+    FourWheelDriveInterface(MotorDriverInterface *frontMotorDriver, MotorDriverInterface *backMotorDriver) {
         frontDriver = frontMotorDriver;
         backDriver = backMotorDriver;
         status = "Ready";
@@ -86,7 +86,7 @@ public:
 
     /// GETTER FUNCTION --> Status
     /// @param verbose [bool] if true, prints the status of the 4 wheel bot in Serial.
-    /// @return String containing the status of the 4 wheel bot system.
+    /// @return [String] containing the status of the 4 wheel bot system.
     String getStatus(bool verbose=false){
         String fullStatus = "4 Wheel Drive System Status: " + status;
         fullStatus += ", Front Left Motor Status: " + frontDriver->getStatus(verbose=false);
