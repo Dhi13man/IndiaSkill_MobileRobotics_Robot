@@ -58,7 +58,7 @@ public:
 
     /// @brief Receives a character message from the HC05 Bluetooth module.
     /// @return [char] The message received. '\0' if nothing is received.
-    char recieveChar() {
+    char receiveChar() {
         char message = '\0';
         if (serial->available()) {
             message = (char) serial->read();

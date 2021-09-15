@@ -4,11 +4,12 @@
 enum ControlMode {
     BLUETOOTH,
     AUTONOMOUS,
-    HYBRID
+    HYBRID,
+    TEST
 };
 
 // Define Control Mode
-ControlMode controlMode = BLUETOOTH;
+const ControlMode controlMode = BLUETOOTH;
 
 // Define Controllers
 BluetoothController *bluetoothController;
@@ -25,7 +26,7 @@ void setup() {
   // Setup based on Control Mode.
   if (controlMode == BLUETOOTH || controlMode == HYBRID) {
     // Set up Bluetooth Interface
-    BluetoothInterface *bluetooth = new BluetoothInterface(14, 15);
+    BluetoothInterface *bluetooth = new BluetoothInterface(50, 51);
     bluetoothController = new BluetoothController(bluetooth, fourWheelDrive);
   }
   
@@ -45,7 +46,7 @@ void loop() {
         setup();
       }
       // Act using Bluetooth Controller logic.
-      bluetoothController->step();
+      bluetoothController->step(true, true);
       break;
 
     case AUTONOMOUS:
@@ -69,8 +70,10 @@ void loop() {
       break;
       // do things
 
+    case TEST:
+      break;
 
     default:
-      Serial.println("Invalid Control Mode");
+      Serial.println("Invalid Control Mode: " + controlMode);
   }
 }

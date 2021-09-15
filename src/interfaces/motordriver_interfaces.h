@@ -71,12 +71,12 @@ public:
     /// @param enableRightPin Pin for right motor speed control.
     /// @return [L298NInterface] object
     L298NInterface(
-        int leftForwardPin = 10,
-        int leftBackwardPin = 9,
-        int rightForwardPin = 8,
-        int rightBackwardPin = 7,
-        int enableLeftPin = 6,
-        int enableRightPin = 5
+        int leftForwardPin,
+        int leftBackwardPin,
+        int rightForwardPin,
+        int rightBackwardPin,
+        int enableLeftPin,
+        int enableRightPin
     ) {
         // Set pin numbers
         lmf = leftForwardPin;

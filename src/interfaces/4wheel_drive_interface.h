@@ -90,8 +90,8 @@ public:
     /// @return [String] containing the status of the 4 wheel bot system.
     String getStatus(bool verbose=false){
         String fullStatus = "4 Wheel Drive System Status: " + status;
-        fullStatus += ", Front Left Motor Status: " + frontDriver->getStatus(verbose=false);
-        fullStatus += ", Front Right Motor Status: " + backDriver->getStatus(verbose=false);
+        fullStatus += ", Front Left Motor Status: " + frontDriver->getStatus(false);
+        fullStatus += ", Front Right Motor Status: " + backDriver->getStatus(false);
         if(verbose) Serial.println(fullStatus);
         return fullStatus;
     }

@@ -30,14 +30,9 @@ public:
         this->bluetooth = bluetooth;
         this->fourWheelDrive = fourWheelDrive;
         
-        // Check if interfaces are initialized and ready.
+        // Check if Bluetooth interface is initialized and ready.
         if (this->bluetooth->getStatus() != "Ready") {
             const String error = "Bluetooth is not ready. Status: ";
-            Serial.println(error);
-            // throw error;
-        }
-        if (this->fourWheelDrive->getStatus() != "Ready") {
-            const String error = "4WheelDrive System is not ready";
             Serial.println(error);
             // throw error;
         }
@@ -49,7 +44,7 @@ public:
     /// @param verbose [bool] if true, the function prints the command received and status of the Robot over Serial Monitor.
     /// @param verboseBluetooth [bool] if true, the function sends the status of the Robot over Bluetooth.
     void step(bool verbose=false, bool verboseBluetooth=false) {
-        char command = bluetooth->recieveChar();
+        char command = bluetooth->receiveChar();
         switch (command) {
             case 'w':
                 fourWheelDrive->forward();
@@ -82,6 +77,9 @@ public:
         
         // Keep track of the status and print it if verbose is true
         status = fourWheelDrive->getStatus();
+        delay(300);
+        fourWheelDrive->stop();
+
         if (verbose) {
             Serial.print("Command: " + String(command));
             Serial.println("\tStatus: " + status);
