@@ -44,7 +44,7 @@ public:
     /// @param speed [int] speed of the motors.
     /// @param verbose [bool] if true, prints the status of the motors after each command.
     void motorsTest(int speed = 255, bool verbose=false) {
-        if (verbose) { Serial.println("Running Motor Unit Tests at speed: " + speed); }
+        if (verbose) Serial.println("Running Motor Unit Tests at speed: " + String(speed));
         fourWheelDrive->forward(speed);
         fourWheelDrive->getStatus(verbose);
         delay(2000);
@@ -71,6 +71,7 @@ public:
         // Receive message from Bluetooth.
         String message = bluetooth->receiveString();
         if (verbose) { Serial.println("Received: " + message); }
+        delay(200);
     }
 
     /// Runs all defined unit tests in [TestController].

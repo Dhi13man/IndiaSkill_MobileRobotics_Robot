@@ -18,7 +18,7 @@ BluetoothController *bluetoothController;
 AutonomousController *autonomousController;
 TestController *testController;
 
-/// Boolaeans to determine whether debug information should be printed.
+/// Booleans to determine whether debug information should be printed.
 const bool printSerialDebug = false;
 const bool printBluetoothDebug = false;
 
@@ -103,6 +103,6 @@ void loop() {
       break;
 
     default:
-      Serial.println("Invalid Control Mode: " + controlMode);
+      Serial.println("Invalid Control Mode: " + String(controlMode));
   }
 }

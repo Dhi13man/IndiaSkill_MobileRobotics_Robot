@@ -46,40 +46,37 @@ public:
     void step(bool verbose=false, bool verboseBluetooth=false) {
         char command = bluetooth->receiveChar();
         switch (command) {
-            case 'w':
+            case 'F':
                 fourWheelDrive->forward();
                 break;
 
-            case 's':
+            case 'B':
                 fourWheelDrive->backward();
                 break;
             
-            case 'a':
+            case 'G':
                 fourWheelDrive->smoothLeft();
                 break;
             
-            case 'd':
+            case 'I':
                 fourWheelDrive->smoothRight();
                 break;
             
-            case 'q':
+            case 'L':
                 fourWheelDrive->hardLeft();
                 break;
 
-            case 'e':
+            case 'R':
                 fourWheelDrive->hardRight();
                 break;
             
-            case ' ':
+            case 'S':
                 fourWheelDrive->stop();
                 break;
         }
-        
-        // Keep track of the status and print it if verbose is true
-        status = fourWheelDrive->getStatus();
-        delay(300);
-        fourWheelDrive->stop();
 
+        // Keep track of the status and print it if verbose is true
+        if (verbose || verboseBluetooth) status = fourWheelDrive->getStatus();
         if (verbose) {
             Serial.print("Command: " + String(command));
             Serial.println("\tStatus: " + status);
@@ -87,6 +84,12 @@ public:
         // Send the status over Bluetooth if verboseBluetooth is true
         if (verboseBluetooth) {
             bluetooth->send(status);
+        }
+
+        // To make control tactile, the Robot is stopped a while after each movement command is received.
+        if (command != 'S') {
+            delay(200);
+            fourWheelDrive->stop();
         }
     }
 };

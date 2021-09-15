@@ -27,5 +27,7 @@ public:
         status = "Ready";
     }
 
-    void step(bool verbose = false);
+    void step(bool verbose = false) {
+        
+    }
 };
