@@ -1,5 +1,5 @@
 #pragma once
-#include "motordriver_interfaces.h"
+#include "motordriver_interfaces.hpp"
 
 /// <summary>
 /// @file 2N_wheel_drive_interface.h
@@ -83,7 +83,7 @@ public:
     /// @param speed Speed of the reverse/backwards movement. Range: 0-255. Default: 255
     void backward(int speed=255){
         for (int i = 0; i < numberOfMotorDrivers; i++)
-            drivers[i]->forward(speed);
+            drivers[i]->backward(speed);
         status = "Moving Backward!";
     }
 

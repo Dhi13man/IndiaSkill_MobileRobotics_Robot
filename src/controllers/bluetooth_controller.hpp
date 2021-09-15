@@ -1,5 +1,5 @@
-#include "..\interfaces\bluetooth_interface.h"
-#include "..\interfaces\2N_wheel_drive_interface.h"
+#include "..\interfaces\bluetooth_interface.hpp"
+#include "..\interfaces\2N_wheel_drive_interface.hpp"
 
 // <summary>
 /// @file bluetooth_controller.h

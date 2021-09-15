@@ -1,6 +1,6 @@
-#include "controllers\bluetooth_controller.h"
-#include "controllers\autonomous_controller.h"
-#include "controllers\test_controller.h"
+#include "controllers\bluetooth_controller.hpp"
+#include "controllers\autonomous_controller.hpp"
+#include "controllers\test_controller.hpp"
 
 /// The Control Mode types available to be used by the Robot.
 enum ControlModes {

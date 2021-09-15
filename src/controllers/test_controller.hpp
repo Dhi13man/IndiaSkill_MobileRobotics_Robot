@@ -1,5 +1,5 @@
-#include "..\interfaces\bluetooth_interface.h"
-#include "..\interfaces\2N_wheel_drive_interface.h"
+#include "..\interfaces\bluetooth_interface.hpp"
+#include "..\interfaces\2N_wheel_drive_interface.hpp"
 
 // <summary>
 /// @file test_controller.h
@@ -9,7 +9,7 @@
 /// @date 2021-09-14
 
 /// @class BluetoothController
-/// @brief This class is used to control the Robot via programmed logic.
+/// @brief This class is used to test the various interfaces of the Robot for quick debugging and fault detection.
 ///
 /// @details The Robot is controlled according to various test logic using the 
 /// [NDualWheelDriveInterface] class to control the motors and [BluetoothInterface] to test Bluetooth communication.
@@ -57,6 +57,7 @@ public:
         fourWheelDrive->hardRight(speed);
         fourWheelDrive->getStatus(verbose);
         delay(2000);
+        Serial.println();
     }
 
     /// Unit test for the [BluetoothInterface] class.
@@ -71,6 +72,7 @@ public:
         // Receive message from Bluetooth.
         String message = bluetooth->receiveString();
         if (verbose) { Serial.println("Received: " + message); }
+        Serial.println();
         delay(200);
     }
 
