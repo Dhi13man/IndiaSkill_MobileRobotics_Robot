@@ -1,8 +1,8 @@
 #include "..\interfaces\bluetooth_interface.h"
-#include "..\interfaces\4wheel_drive_interface.h"
+#include "..\interfaces\2N_wheel_drive_interface.h"
 
 // <summary>
-/// @file test_controller.cpp
+/// @file test_controller.h
 /// @brief This file contains the BluetoothInterface class.
 /// @author Dhiman Seal
 /// @version 1.0
@@ -12,20 +12,20 @@
 /// @brief This class is used to control the Robot via programmed logic.
 ///
 /// @details The Robot is controlled according to various test logic using the 
-/// [FourWheelDriveInterface] class to control the motors and [BluetoothInterface] to test Bluetooth communication.
+/// [NDualWheelDriveInterface] class to control the motors and [BluetoothInterface] to test Bluetooth communication.
 class TestController {
 private:
     BluetoothInterface* bluetooth;
     
-    FourWheelDriveInterface* fourWheelDrive;
+    NDualWheelDriveInterface* fourWheelDrive;
 
     String status;
 
 public:
     /// @brief Constuctor initializing the [TestController] Class.
-    /// @param fourWheelDrive [FourWheelDriveInterface] object controlling the motors.
+    /// @param fourWheelDrive [NDualWheelDriveInterface] object controlling the motors.
     /// @return [TestController] object
-    TestController(BluetoothInterface* bluetooth, FourWheelDriveInterface* fourWheelDrive) {
+    TestController(BluetoothInterface* bluetooth, NDualWheelDriveInterface* fourWheelDrive) {
         this->fourWheelDrive = fourWheelDrive;
         this->bluetooth = bluetooth;
 
@@ -38,7 +38,7 @@ public:
         status = "Ready";
     }
 
-    /// Unit test for the [FourWheelDriveInterface] class. 
+    /// Unit test for the [NDualWheelDriveInterface] class. 
     /// Tests the motors by sending movement commands to the bot.
     ///
     /// @param speed [int] speed of the motors.

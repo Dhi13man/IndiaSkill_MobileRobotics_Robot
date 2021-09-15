@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 /// <summary>
-/// @file motordriver_interface.cpp
+/// @file motordriver_interface.h
 /// @brief Motor driver Interfaces
 /// @author Dhiman Seal
 /// @version 1.0

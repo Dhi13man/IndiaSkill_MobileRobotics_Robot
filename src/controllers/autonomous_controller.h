@@ -1,7 +1,7 @@
-#include "..\interfaces\4wheel_drive_interface.h"
+#include "..\interfaces\2N_wheel_drive_interface.h"
 
 // <summary>
-/// @file autonomous_controller.cpp
+/// @file autonomous_controller.h
 /// @brief This file contains the AutonomousController class.
 /// @author Dhiman Seal
 /// @version 1.0
@@ -11,18 +11,18 @@
 /// @brief This class is used to control the Robot via programmed logic.
 ///
 /// @details The Robot is controlled according to the logic coded for autonomous driving,
-/// using the [FourWheelDriveInterface] class to control the motors.
+/// using the [NDualWheelDriveInterface] class to control the motors.
 class AutonomousController {
 private:
-    FourWheelDriveInterface* fourWheelDrive;
+    NDualWheelDriveInterface* fourWheelDrive;
 
     String status;
 
 public:
     /// @brief Constuctor initializing the [AutonomousController] Class.
-    /// @param fourWheelDrive [FourWheelDriveInterface] object controlling the motors.
+    /// @param fourWheelDrive [NDualWheelDriveInterface] object controlling the motors.
     /// @return [AutonomousController] object
-    AutonomousController(FourWheelDriveInterface* fourWheelDrive) {
+    AutonomousController(NDualWheelDriveInterface* fourWheelDrive) {
         this->fourWheelDrive = fourWheelDrive;
         status = "Ready";
     }

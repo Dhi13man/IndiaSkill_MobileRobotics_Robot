@@ -27,29 +27,31 @@ void setup() {
   // Set up Motor Drivers
   L298NInterface *frontL298N = new L298NInterface(2, 3, 4, 5, 6, 7);
   L298NInterface *backL298N = new L298NInterface(8, 9, 10, 11, 12, 13);
-  // Set up 4-wheel, 2 motor driver drive interface
-  FourWheelDriveInterface *fourWheelDrive = new FourWheelDriveInterface(frontL298N, backL298N);
+
+  // Set up 4-wheel, 2 motor-driver drive interface
+  MotorDriverInterface *motorDrivers[] = {frontL298N, backL298N};
+  NDualWheelDriveInterface *nDualWheelDrive = new NDualWheelDriveInterface(2, motorDrivers);
   // Set up Bluetooth communication interface
-  BluetoothInterface *bluetooth = new BluetoothInterface(50, 51);
+  BluetoothInterface *bluetooth = new BluetoothInterface(53, 52);
 
   // Setup based on Control Mode.
   switch (controlMode) {
     case ControlModes::AUTONOMOUS:
-      autonomousController = new AutonomousController(fourWheelDrive);
+      autonomousController = new AutonomousController(nDualWheelDrive);
       delete bluetooth;
       break;
 
     case ControlModes::BLUETOOTH:
-      bluetoothController = new BluetoothController(bluetooth, fourWheelDrive);
+      bluetoothController = new BluetoothController(bluetooth, nDualWheelDrive);
       break;
 
     case ControlModes::HYBRID:
-      autonomousController = new AutonomousController(fourWheelDrive);
-      bluetoothController = new BluetoothController(bluetooth, fourWheelDrive);
+      autonomousController = new AutonomousController(nDualWheelDrive);
+      bluetoothController = new BluetoothController(bluetooth, nDualWheelDrive);
       break;
 
     case ControlModes::TEST:
-      testController = new TestController(bluetooth, fourWheelDrive);
+      testController = new TestController(bluetooth, nDualWheelDrive);
       break;
   }
 }

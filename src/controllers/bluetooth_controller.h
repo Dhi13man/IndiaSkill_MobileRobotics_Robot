@@ -1,8 +1,8 @@
 #include "..\interfaces\bluetooth_interface.h"
-#include "..\interfaces\4wheel_drive_interface.h"
+#include "..\interfaces\2N_wheel_drive_interface.h"
 
 // <summary>
-/// @file bluetooth_controller.cpp
+/// @file bluetooth_controller.h
 /// @brief This file contains the BluetoothController class.
 /// @author Dhiman Seal
 /// @version 1.0
@@ -12,23 +12,23 @@
 /// @brief This class is used to control the Robot via Bluetooth.
 ///
 /// @details BluetoothController facilitates the control of the Robot according to the messages
-/// received by the [BlueToothInterface], using the [FourWheelDriveInterface] class to control the motors.
+/// received by the [BlueToothInterface], using the [NDualWheelDriveInterface] class to control the motors.
 class BluetoothController {
 private:
     BluetoothInterface* bluetooth;
 
-    FourWheelDriveInterface* fourWheelDrive;
+    NDualWheelDriveInterface* nDualWheelDrive;
 
     String status;
 
 public:
     /// @brief Constuctor initializing the [BluetoothController] Class.
     /// @param bluetooth [BluetoothInterface] object receiving messages over Bluetooth using the HC05 Software Serial.
-    /// @param fourWheelDrive [FourWheelDriveInterface] object controlling the motors.
+    /// @param nDualWheelDrive [NDualWheelDriveInterface] object controlling the motors.
     /// @return [BluetoothController] object
-    BluetoothController(BluetoothInterface* bluetooth, FourWheelDriveInterface* fourWheelDrive) {
+    BluetoothController(BluetoothInterface* bluetooth, NDualWheelDriveInterface* nDualWheelDrive) {
         this->bluetooth = bluetooth;
-        this->fourWheelDrive = fourWheelDrive;
+        this->nDualWheelDrive = nDualWheelDrive;
         
         // Check if Bluetooth interface is initialized and ready.
         if (this->bluetooth->getStatus() != "Ready") {
@@ -47,39 +47,39 @@ public:
         char command = bluetooth->receiveChar();
         switch (command) {
             case 'F':
-                fourWheelDrive->forward();
+                nDualWheelDrive->forward();
                 break;
 
             case 'B':
-                fourWheelDrive->backward();
+                nDualWheelDrive->backward();
                 break;
             
             case 'G':
-                fourWheelDrive->smoothLeft();
+                nDualWheelDrive->smoothLeft();
                 break;
             
             case 'I':
-                fourWheelDrive->smoothRight();
+                nDualWheelDrive->smoothRight();
                 break;
             
             case 'L':
-                fourWheelDrive->hardLeft();
+                nDualWheelDrive->hardLeft();
                 break;
 
             case 'R':
-                fourWheelDrive->hardRight();
+                nDualWheelDrive->hardRight();
                 break;
             
             case 'S':
-                fourWheelDrive->stop();
+                nDualWheelDrive->stop();
                 break;
         }
 
-        // Keep track of the status and print it if verbose is true
-        if (verbose || verboseBluetooth) status = fourWheelDrive->getStatus();
+        // Keep track of the status and print it if verbose is true  
+        if (verbose || verboseBluetooth) status = nDualWheelDrive->getStatus();
         if (verbose) {
             Serial.print("Command: " + String(command));
-            Serial.println("\tStatus: " + status);
+            Serial.println("; Status: " + status);
         }
         // Send the status over Bluetooth if verboseBluetooth is true
         if (verboseBluetooth) {
@@ -87,9 +87,9 @@ public:
         }
 
         // To make control tactile, the Robot is stopped a while after each movement command is received.
-        if (command != 'S') {
+        if (command != 'S' && command != '\0') {
             delay(200);
-            fourWheelDrive->stop();
+            nDualWheelDrive->stop();
         }
     }
 };
