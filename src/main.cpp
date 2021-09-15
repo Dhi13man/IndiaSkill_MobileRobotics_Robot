@@ -2,8 +2,8 @@
 #include "controllers\autonomous_controller.h"
 #include "controllers\test_controller.h"
 
-/// The Control types available to be used by the Robot.
-enum ControlMode {
+/// The Control Mode types available to be used by the Robot.
+enum ControlModes {
     AUTONOMOUS,
     BLUETOOTH,
     HYBRID,
@@ -11,7 +11,7 @@ enum ControlMode {
 };
 
 // Define Control Mode
-const ControlMode controlMode = ControlMode::BLUETOOTH;
+const ControlModes controlMode = ControlModes::BLUETOOTH;
 
 // Define Controllers
 BluetoothController *bluetoothController;
@@ -34,21 +34,21 @@ void setup() {
 
   // Setup based on Control Mode.
   switch (controlMode) {
-    case ControlMode::AUTONOMOUS:
+    case ControlModes::AUTONOMOUS:
       autonomousController = new AutonomousController(fourWheelDrive);
       delete bluetooth;
       break;
 
-    case ControlMode::BLUETOOTH:
+    case ControlModes::BLUETOOTH:
       bluetoothController = new BluetoothController(bluetooth, fourWheelDrive);
       break;
 
-    case ControlMode::HYBRID:
+    case ControlModes::HYBRID:
       autonomousController = new AutonomousController(fourWheelDrive);
       bluetoothController = new BluetoothController(bluetooth, fourWheelDrive);
       break;
 
-    case ControlMode::TEST:
+    case ControlModes::TEST:
       testController = new TestController(bluetooth, fourWheelDrive);
       break;
   }
@@ -57,7 +57,7 @@ void setup() {
 void loop() {
   // Run based on Control Mode.
   switch (controlMode) {
-    case ControlMode::AUTONOMOUS:
+    case ControlModes::AUTONOMOUS:
       // Validate if BluetoothController is set up.
       if (autonomousController == NULL) {
         Serial.println("Autonomous+ Controller is NULL");
@@ -67,7 +67,7 @@ void loop() {
       autonomousController->step(printSerialDebug);
       break;
 
-    case ControlMode::BLUETOOTH:
+    case ControlModes::BLUETOOTH:
       // Validate if BluetoothController is set up.
       if (bluetoothController == NULL) {
         Serial.println("Bluetooth Controller is NULL");
@@ -77,7 +77,7 @@ void loop() {
       bluetoothController->step(printSerialDebug, printBluetoothDebug);
       break;
 
-    case ControlMode::HYBRID:
+    case ControlModes::HYBRID:
       // Validate if BluetoothController is set up.
       if (bluetoothController == NULL) {
         Serial.println("Bluetooth Controller is NULL");
@@ -88,7 +88,7 @@ void loop() {
       // Act using Autonomous Controller logic.
       break;
 
-    case ControlMode::TEST:
+    case ControlModes::TEST:
       // Validate if BluetoothController is set up.
       if (testController == NULL) {
         Serial.println("Test Controller is NULL");
