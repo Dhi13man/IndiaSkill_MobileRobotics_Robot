@@ -2,7 +2,7 @@
 
 // <summary>
 /// @file autonomous_controller.cpp
-/// @brief This file contains the BluetoothInterface class.
+/// @brief This file contains the AutonomousController class.
 /// @author Dhiman Seal
 /// @version 1.0
 /// @date 2021-09-14
@@ -24,14 +24,8 @@ public:
     /// @return [AutonomousController] object
     AutonomousController(FourWheelDriveInterface* fourWheelDrive) {
         this->fourWheelDrive = fourWheelDrive;
-        // Check if interface is initialized and ready
-        if (this->fourWheelDrive->getStatus() != "Ready") {
-            const String error = "4WheelDrive System is not ready";
-            Serial.println(error);
-            // throw error;
-        }
         status = "Ready";
     }
 
-    void step();
+    void step(bool verbose = false);
 };
