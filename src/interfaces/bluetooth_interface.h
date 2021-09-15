@@ -16,6 +16,8 @@
 /// @details Initialized with [rx] and [tx] receiver and transmitter pins that help utilize Serial 
 /// Communication to transfer messages between the Robot and the controlling application.
 ///
+/// @see https://www.arduino.cc/en/Reference/SoftwareSerial
+///
 /// The SoftwareSerial library has the following known limitations:
 ///   - If using multiple software serial ports, only one can receive data at a time.
 ///   - Not all pins on the Mega and Mega 2560 support change interrupts, so only the following can be used for RX: 

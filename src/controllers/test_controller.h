@@ -73,7 +73,7 @@ public:
         if (verbose) { Serial.println("Received: " + message); }
     }
 
-    /// Runs all unit tests.
+    /// Runs all defined unit tests in [TestController].
     ///
     /// @param verbose [bool] if true, prints the status of the motors after each command.
     void runTests(bool verbose=false) {
