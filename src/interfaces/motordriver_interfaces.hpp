@@ -1,7 +1,9 @@
+#pragma once
+
 #include <Arduino.h>
 
 /// <summary>
-/// @file motordriver_interface.h
+/// @file motordriver_interface.hpp
 /// @brief Motor driver Interfaces
 /// @author Dhiman Seal
 /// @version 1.0
@@ -67,17 +69,19 @@ public:
     /// @param leftBackwardPin Pin for left motor backward direction
     /// @param rightForwardPin Pin for right motor forward direction
     /// @param rightBackwardPin Pin for right motor backward direction
-    /// @param enableLeftPin Pin for left motor speed control.
-    /// @param enableRightPin Pin for right motor speed control.
+    /// @param enableLeftPin Pin for left motor speed control. Default -1 (Speed control Disabled)
+    /// @param enableRightPin Pin for right motor speed control. Default -1 (Speed control Disabled)
     /// @return [L298NInterface] object
     L298NInterface(
         int leftForwardPin,
         int leftBackwardPin,
         int rightForwardPin,
         int rightBackwardPin,
-        int enableLeftPin,
-        int enableRightPin
+        int enableLeftPin=-1,
+        int enableRightPin=-1
     ) {
+        if (enableLeftPin == -1) Serial.println("Left Motor Speed Control pin not set up!");
+        if (enableRightPin == -1) Serial.println("Right Motor Speed Control pin not set up!");
         // Set pin numbers
         lmf = leftForwardPin;
         lmb = leftBackwardPin;
@@ -90,8 +94,8 @@ public:
         pinMode(lmb, OUTPUT);
         pinMode(rmf, OUTPUT);
         pinMode(rmb, OUTPUT);
-        pinMode(enl, OUTPUT);
-        pinMode(enr, OUTPUT);
+        if (enl != -1) pinMode(enl, OUTPUT);
+        if (enr != -1) pinMode(enr, OUTPUT);
         // Status of Bot: Ready!
         status = "Ready";
     }
@@ -103,7 +107,7 @@ public:
         digitalWrite(lmb, 0);
         digitalWrite(rmf, 1);
         digitalWrite(rmb, 0);
-        analogWrite(enr, speed);
+        if (enr != -1) analogWrite(enr, speed);
         status = "Moving Smooth Left!";
     }
 
@@ -114,7 +118,7 @@ public:
         digitalWrite(lmb, 0);
         digitalWrite(rmf, 0);
         digitalWrite(rmb, 0);
-        analogWrite(enl, speed);
+        if (enl != -1) analogWrite(enl, speed);
         status = "Moving Smooth Right!";
     }
 
@@ -125,8 +129,8 @@ public:
         digitalWrite(lmb, 1);
         digitalWrite(rmf, 1);
         digitalWrite(rmb, 0);
-        analogWrite(enl, speed);
-        analogWrite(enr, speed);
+        if (enl != -1) analogWrite(enl, speed);
+        if (enr != -1) analogWrite(enr, speed);
         status = "Moving Hard Left!";
     }
 
@@ -137,8 +141,8 @@ public:
         digitalWrite(lmb, 0);
         digitalWrite(rmf, 0);
         digitalWrite(rmb, 1);
-        analogWrite(enl, speed);
-        analogWrite(enr, speed);
+        if (enl != -1) analogWrite(enl, speed);
+        if (enr != -1) analogWrite(enr, speed);
         status = "Moving Hard Right!";
     }
 
@@ -149,8 +153,8 @@ public:
         digitalWrite(lmb, 0);
         digitalWrite(rmf, 1);
         digitalWrite(rmb, 0);
-        analogWrite(enl, speed);
-        analogWrite(enr, speed);
+        if (enl != -1) analogWrite(enl, speed);
+        if (enr != -1) analogWrite(enr, speed);
         status = "Moving Forward!";
     }
 
@@ -161,6 +165,8 @@ public:
         digitalWrite(lmb, 1);
         digitalWrite(rmf, 0);
         digitalWrite(rmb, 1);
+        if (enl != -1) analogWrite(enl, speed);
+        if (enr != -1) analogWrite(enr, speed);
         status = "Moving Backward!";
     }
 
@@ -170,8 +176,8 @@ public:
         digitalWrite(lmb, 0);
         digitalWrite(rmf, 0);
         digitalWrite(rmb, 0);
-        analogWrite(enl, 0);
-        analogWrite(enr, 0);
+        if (enl != -1) analogWrite(enl, 0);
+        if (enr != -1) analogWrite(enr, 0);
         status = "Stopped!";
     }
 };

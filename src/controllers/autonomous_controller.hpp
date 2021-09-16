@@ -1,7 +1,8 @@
 #include "..\interfaces\2N_wheel_drive_interface.hpp"
+#include "..\interfaces\lifter_interface.hpp"
 
 // <summary>
-/// @file autonomous_controller.h
+/// @file autonomous_controller.hpp
 /// @brief This file contains the AutonomousController class.
 /// @author Dhiman Seal
 /// @version 1.0
@@ -16,6 +17,8 @@ class AutonomousController {
 private:
     NDualWheelDriveInterface* fourWheelDrive;
 
+    LifterInterface* lifter;
+
     String status;
 
 public:
@@ -24,6 +27,16 @@ public:
     /// @return [AutonomousController] object
     AutonomousController(NDualWheelDriveInterface* fourWheelDrive) {
         this->fourWheelDrive = fourWheelDrive;
+        status = "Ready";
+    }
+
+    /// @brief Constuctor initializing the [AutonomousController] Class.
+    /// @param fourWheelDrive [NDualWheelDriveInterface] object controlling the motors.
+    /// @param lifter [LifterInterface] object controlling the lifter.
+    /// @return [AutonomousController] object
+    AutonomousController(NDualWheelDriveInterface* fourWheelDrive, LifterInterface* lifter) {
+        this->fourWheelDrive = fourWheelDrive;
+        this->lifter = lifter;
         status = "Ready";
     }
 

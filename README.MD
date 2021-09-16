@@ -17,30 +17,30 @@ The Robot's Hardware components associated with the project includes:
 
 - **main.cpp**
 - **interfaces**
-  - **2N_wheel_drive_interface.h**
-  - **bluetooth_interface.h**
-  - **motordriver_interfaces.h**
+  - **2N_wheel_drive_interface.hpp**
+  - **bluetooth_interface.hpp**
+  - **motordriver_interfaces.hpp**
 - **controllers**
-  - **autonomous_controller.h**
-  - **bluetooth_controller.h**
-  - **test_controller.h**
+  - **autonomous_controller.hpp**
+  - **bluetooth_controller.hpp**
+  - **test_controller.hpp**
 
 ## Project Details
 
 1. **Main.cpp:** Main file for the project.
 2. **interfaces:** Folder containing all the interfaces interfacing with the hardware.
-   1. **2N_wheel_drive_interface.h:** Contains a `NDualWheelDriveInterface` Class which uses N `MotorDriverInterface` Classes (defined in `motordriver_interfaces.cpp`) objects to run the 2N wheeled bot, as needed.
+   1. **2N_wheel_drive_interface.hpp:** Contains a `NDualWheelDriveInterface` Class which uses N `MotorDriverInterface` Classes (defined in `motordriver_interfaces.cpp`) objects to run the 2N wheeled bot, as needed.
 
-   2. **bluetooth_interface.h:** Contains a `BluetoothInterface` Class that interfaces with the HC05 Hardware to communicate using Bluetooth HC05 Module to send and recieve Serial messages.
+   2. **bluetooth_interface.hpp:** Contains a `BluetoothInterface` Class that interfaces with the HC05 Hardware to communicate using Bluetooth HC05 Module to send and recieve Serial messages.
 
-   3. **motordriver_interfaces.h:** Contains a `MotorDriverInterface` Class Template that is extended by specific Motor Driver classes like `L298NInterface` to interface with the H-Bridge Hardware, to control the motors.
+   3. **motordriver_interfaces.hpp:** Contains a `MotorDriverInterface` Class Template that is extended by specific Motor Driver classes like `L298NInterface` to interface with the H-Bridge Hardware, to control the motors.
 
 3. **controllers:** Folder containing all the controllers responsible for controlling the robot (the brains of the operation).
-   1. **autonomous_controller.h**: Contains a `AutonomousController` Class that uses a `NDualWheelDriveInterface` Class Object to run the robot in autonomous mode for a specific autonomous round of the competition.
+   1. **autonomous_controller.hpp**: Contains a `AutonomousController` Class that uses a `NDualWheelDriveInterface` Class Object to run the robot in autonomous mode for a specific autonomous round of the competition.
 
-   2. **bluetooth_controller.h:** Contains a `BluetoothController` Class that uses the `BluetoothInterface` Class object to communicate using Bluetooth and control the robot using a Four Wheel Drive Interface (`NDualWheelDriveInterface` defined in `2N_wheel_drive_interface.cpp`) Class Object.
+   2. **bluetooth_controller.hpp:** Contains a `BluetoothController` Class that uses the `BluetoothInterface` Class object to communicate using Bluetooth and control the robot using a Four Wheel Drive Interface (`NDualWheelDriveInterface` defined in `2N_wheel_drive_interface.cpp`) Class Object.
 
-   3. **test_controller.h:** Contains a `TestController` Class that uses the `BluetoothInterface` Class object to communicate using Bluetooth and `NDualWheelDriveInterface` Class Object to run the robot and perform various unit tests, to quickly and efficiently verify the working of the Interfaces.
+   3. **test_controller.hpp:** Contains a `TestController` Class that uses the `BluetoothInterface` Class object to communicate using Bluetooth and `NDualWheelDriveInterface` Class Object to run the robot and perform various unit tests, to quickly and efficiently verify the working of the Interfaces.
 
 ## Project Dependencies
 

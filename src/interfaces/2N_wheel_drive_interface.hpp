@@ -2,7 +2,7 @@
 #include "motordriver_interfaces.hpp"
 
 /// <summary>
-/// @file 2N_wheel_drive_interface.h
+/// @file 2N_wheel_drive_interface.hpp
 /// @brief This file contains the [NDualWheelDriveInterface] class.
 /// @author Dhiman Seal
 /// @version 1.0
@@ -28,7 +28,7 @@ private:
 public:
     /// @brief Constuctor initializing the [NDualWheelDriveInterface] Class.
     /// @param numberOfMotorDrivers Number of [MotorDriverInterface] objects, each meant to control 2 motors of the robot.
-    /// @param numberOfMotorDrivers Array of [MotorDriverInterface] objects, each meant to control 2 motors of the robot. 
+    /// @param drivers Array of [MotorDriverInterface] objects, each meant to control 2 motors of the robot. 
     /// Can Have a MAXIMUM of [MAX_NUMBER_OF_MOTOR_DRIVERS] drivers. Any more will be ignored.
     /// @return [NDualWheelDriveInterface] object
     NDualWheelDriveInterface(int numberOfMotorDrivers, MotorDriverInterface *drivers[]) {
@@ -95,8 +95,8 @@ public:
     }
 
     /// GETTER FUNCTION --> Status
-    /// @param verbose [bool] if true, prints the status of the 4 wheel bot in Serial.
-    /// @return [String] containing the status of the 4 wheel bot system.
+    /// @param verbose [bool] if true, prints the status of the 2N wheel bot in Serial.
+    /// @return [String] containing the status of the 2N wheel bot system.
     String getStatus(bool verbose=false){
         String fullStatus = String(numberOfMotorDrivers) + " Wheel Drive System Status: " + status;
         for (int i = 0; i < numberOfMotorDrivers; i++) {

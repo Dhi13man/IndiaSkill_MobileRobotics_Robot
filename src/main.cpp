@@ -24,30 +24,33 @@ const bool printBluetoothDebug = false;
 
 void setup() {
   Serial.begin(9600);
-  // Set up Motor Drivers
-  L298NInterface *frontL298N = new L298NInterface(2, 3, 4, 5, 6, 7);
-  L298NInterface *backL298N = new L298NInterface(8, 9, 10, 11, 12, 13);
-
   // Set up 4-wheel, 2 motor-driver drive interface
+  L298NInterface *frontL298N = new L298NInterface(2, 3, 4, 5, 6, 7);
+  L298NInterface *backL298N = new L298NInterface(14, 15, 16, 17, 18, 19);
   MotorDriverInterface *motorDrivers[] = {frontL298N, backL298N};
   NDualWheelDriveInterface *nDualWheelDrive = new NDualWheelDriveInterface(2, motorDrivers);
+
+  // Set up 1 motor-driver Lifter interface
+  L298NInterface *clawL298N = new L298NInterface(8, 9, 10, 11);
+  LifterInterface *lifter = new LifterInterface(clawL298N);
+
   // Set up Bluetooth communication interface
   BluetoothInterface *bluetooth = new BluetoothInterface(53, 52);
 
   // Setup based on Control Mode.
   switch (controlMode) {
     case ControlModes::AUTONOMOUS:
-      autonomousController = new AutonomousController(nDualWheelDrive);
-      delete bluetooth;
+      autonomousController = new AutonomousController(nDualWheelDrive, lifter);
+      delete bluetooth; // Bluetoooth not needed in Autonomoouos Control Mode.
       break;
 
     case ControlModes::BLUETOOTH:
-      bluetoothController = new BluetoothController(bluetooth, nDualWheelDrive);
+      bluetoothController = new BluetoothController(bluetooth, nDualWheelDrive, lifter);
       break;
 
     case ControlModes::HYBRID:
-      autonomousController = new AutonomousController(nDualWheelDrive);
-      bluetoothController = new BluetoothController(bluetooth, nDualWheelDrive);
+      autonomousController = new AutonomousController(nDualWheelDrive, lifter);
+      bluetoothController = new BluetoothController(bluetooth, nDualWheelDrive, lifter);
       break;
 
     case ControlModes::TEST:
@@ -97,11 +100,11 @@ void loop() {
         setup();
       }
       // Run Tests using Test Controller logic.
-      testController->runTests(printSerialDebug);
+      //testController->runTests(printSerialDebug);
       // testController->motorsTest(255, printSerialDebug);
       // testController->motorsTest(0, printSerialDebug);
       // testController->motorsTest(127, printSerialDebug);
-      // testController->bluetoothTest(printSerialDebug);
+      testController->bluetoothTest(printSerialDebug);
       break;
 
     default:

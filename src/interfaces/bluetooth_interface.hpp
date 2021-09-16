@@ -4,7 +4,7 @@
 #include <SoftwareSerial.h>
 
 // <summary>
-/// @file bluetooth_interface.h
+/// @file bluetooth_interface.hpp
 /// @brief This file contains the BluetoothInterface class.
 /// @author Dhiman Seal
 /// @version 1.0

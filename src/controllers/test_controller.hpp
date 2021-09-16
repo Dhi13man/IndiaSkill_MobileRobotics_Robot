@@ -2,7 +2,7 @@
 #include "..\interfaces\2N_wheel_drive_interface.hpp"
 
 // <summary>
-/// @file test_controller.h
+/// @file test_controller.hpp
 /// @brief This file contains the BluetoothInterface class.
 /// @author Dhiman Seal
 /// @version 1.0
@@ -19,6 +19,8 @@ private:
     
     NDualWheelDriveInterface* fourWheelDrive;
 
+    LifterInterface* lifter;
+
     String status;
 
 public:
@@ -28,6 +30,24 @@ public:
     TestController(BluetoothInterface* bluetooth, NDualWheelDriveInterface* fourWheelDrive) {
         this->fourWheelDrive = fourWheelDrive;
         this->bluetooth = bluetooth;
+
+        // Check if Bluetooth interface is initialized and ready.
+        if (this->bluetooth->getStatus() != "Ready") {
+            const String error = "Bluetooth is not ready. Status: ";
+            Serial.println(error);
+            // throw error;
+        }
+        status = "Ready";
+    }
+
+    /// @brief Constuctor initializing the [TestController] Class.
+    /// @param fourWheelDrive [NDualWheelDriveInterface] object controlling the motors.
+    /// @param lifter [LifterInterface] object controlling the lifter.
+    /// @return [TestController] object
+    TestController(BluetoothInterface* bluetooth, NDualWheelDriveInterface* fourWheelDrive, LifterInterface* lifter) {
+        this->bluetooth = bluetooth;
+        this->fourWheelDrive = fourWheelDrive;
+        this->lifter = lifter;
 
         // Check if Bluetooth interface is initialized and ready.
         if (this->bluetooth->getStatus() != "Ready") {
