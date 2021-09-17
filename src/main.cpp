@@ -40,7 +40,7 @@ void setup() {
   // Setup based on Control Mode.
   switch (controlMode) {
     case ControlModes::AUTONOMOUS:
-      autonomousController = new AutonomousController(nDualWheelDrive, lifter);
+      autonomousController = new AutonomousController(nDualWheelDrive, lifter, 13, 12);
       delete bluetooth; // Bluetoooth not needed in Autonomoouos Control Mode.
       break;
 
@@ -49,7 +49,7 @@ void setup() {
       break;
 
     case ControlModes::HYBRID:
-      autonomousController = new AutonomousController(nDualWheelDrive, lifter);
+      autonomousController = new AutonomousController(nDualWheelDrive, lifter, 13, 12);
       bluetoothController = new BluetoothController(bluetooth, nDualWheelDrive, lifter);
       break;
 
@@ -100,11 +100,12 @@ void loop() {
         setup();
       }
       // Run Tests using Test Controller logic.
-      //testController->runTests(printSerialDebug);
+      testController->runTests(printSerialDebug);
       // testController->motorsTest(255, printSerialDebug);
       // testController->motorsTest(0, printSerialDebug);
       // testController->motorsTest(127, printSerialDebug);
-      testController->bluetoothTest(printSerialDebug);
+      // testController->bluetoothTest(printSerialDebug);
+      // testController->lifterTest(printSerialDebug);
       break;
 
     default:

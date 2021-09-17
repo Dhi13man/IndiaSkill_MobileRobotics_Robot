@@ -16,7 +16,7 @@
 class LifterInterface {
 private:
 
-    MotorDriverInterface *motorDriver;
+    MotorDriverInterface *lifterMotorDriver;
 
     String status;
 
@@ -25,28 +25,28 @@ public:
     /// @param motorDrive Motor driver Interface object used to move the lifter claw up and down.
     /// @return [LifterInterface] object
     LifterInterface(MotorDriverInterface *motorDriver) {
-        this->motorDriver = motorDriver;
-        status = "Ready";
+        this->lifterMotorDriver = motorDriver;
+        status = "ready";
     }
 
     /// MOVEMENT FUNCTION --> Move Claw Up
     /// @param speed Speed of the left movement. Range: 0-255. Default: 255
     void moveUp(int speed=255){
-        motorDriver->forward(speed);
-        status = "Claw Up!";
+        lifterMotorDriver->leftMotorForward(speed);
+        status = "lift_up";
     }
 
     /// MOVEMENT FUNCTIONS --> Move Claw Down
     /// @param speed Speed of the right movement. Range: 0-255. Default: 255
     void moveDown(int speed=255){
-        motorDriver->backward(speed);
-        status = "Claw Down!";
+        lifterMotorDriver->leftMotorBackward(speed);
+        status = "lift_down";
     }
 
     /// MOVEMENT FUNCTIONS --> Stop
     void stop(){
-        motorDriver->stop();
-        status = "Stopped!";
+        lifterMotorDriver->stop();
+        status = "stopped";
     }
 
     /// GETTER FUNCTION --> Status

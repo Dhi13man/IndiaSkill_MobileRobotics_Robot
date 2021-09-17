@@ -41,7 +41,7 @@ public:
     BluetoothInterface(int rx, int tx, int baud=9600) {
         serial = new SoftwareSerial(rx, tx);
         serial->begin(baud);
-        status = "Ready";
+        status = "ready";
     }
 
     /// @brief Sends a message to the HC05 Bluetooth module.

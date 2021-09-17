@@ -36,7 +36,7 @@ public:
         for (int i = 0; i < min(numberOfMotorDrivers, MAX_NUMBER_OF_MOTOR_DRIVERS); i++) {
             this->drivers[i] = drivers[i]; 
         }
-        status = "Ready";
+        status = "ready";
     }
 
     /// MOVEMENT FUNCTION --> Left
@@ -44,7 +44,7 @@ public:
     void smoothLeft(int speed=255){
         for (int i = 0; i < numberOfMotorDrivers; i++)
             drivers[i]->smoothLeft(speed);
-        status = "Moving Smooth Left!";
+        status = "smooth_left";
     }
 
     /// MOVEMENT FUNCTIONS --> Right
@@ -52,7 +52,7 @@ public:
     void smoothRight(int speed=255){
         for (int i = 0; i < numberOfMotorDrivers; i++)
             drivers[i]->smoothRight(speed);
-        status = "Moving Smooth Right!";
+        status = "smooth_right";
     }
 
     /// MOVEMENT FUNCTIONS --> On-Spot Left
@@ -60,7 +60,7 @@ public:
     void hardLeft(int speed=255){
         for (int i = 0; i < numberOfMotorDrivers; i++)
             drivers[i]->hardLeft(speed);
-        status = "Moving Hard Left!";
+        status = "hard_left";
     }
 
     /// MOVEMENT FUNCTIONS --> On-Spot Right
@@ -68,7 +68,7 @@ public:
     void hardRight(int speed=255){
         for (int i = 0; i < numberOfMotorDrivers; i++)
             drivers[i]->hardRight(speed);
-        status = "Moving Hard Right!";
+        status = "hard_right";
     }
 
     /// MOVEMENT FUNCTIONS --> Forward
@@ -76,7 +76,7 @@ public:
     void forward(int speed=255){
         for (int i = 0; i < numberOfMotorDrivers; i++)
             drivers[i]->forward(speed);
-        status = "Moving Forward!";
+        status = "forward";
     }
 
     /// MOVEMENT FUNCTIONS --> Back
@@ -84,14 +84,14 @@ public:
     void backward(int speed=255){
         for (int i = 0; i < numberOfMotorDrivers; i++)
             drivers[i]->backward(speed);
-        status = "Moving Backward!";
+        status = "backward";
     }
 
     /// MOVEMENT FUNCTIONS --> Stop
     void stop(){
         for (int i = 0; i < numberOfMotorDrivers; i++)
             drivers[i]->stop();
-        status = "Stopped!";
+        status = "stopped";
     }
 
     /// GETTER FUNCTION --> Status

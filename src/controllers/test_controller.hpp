@@ -32,12 +32,12 @@ public:
         this->bluetooth = bluetooth;
 
         // Check if Bluetooth interface is initialized and ready.
-        if (this->bluetooth->getStatus() != "Ready") {
+        if (this->bluetooth->getStatus() != "ready") {
             const String error = "Bluetooth is not ready. Status: ";
             Serial.println(error);
             // throw error;
         }
-        status = "Ready";
+        status = "ready";
     }
 
     /// @brief Constuctor initializing the [TestController] Class.
@@ -50,12 +50,12 @@ public:
         this->lifter = lifter;
 
         // Check if Bluetooth interface is initialized and ready.
-        if (this->bluetooth->getStatus() != "Ready") {
+        if (this->bluetooth->getStatus() != "ready") {
             const String error = "Bluetooth is not ready. Status: ";
             Serial.println(error);
             // throw error;
         }
-        status = "Ready";
+        status = "ready";
     }
 
     /// Unit test for the [NDualWheelDriveInterface] class. 
@@ -94,6 +94,20 @@ public:
         if (verbose) { Serial.println("Received: " + message); }
         Serial.println();
         delay(200);
+    }
+
+    /// Unit test for the [LifterInterface] class.
+    /// Tests the lifter by sending movement commands to the lifter.
+    ///
+    /// @param verbose [bool] if true, prints the status of the lifter after each command.
+    void lifterTest(bool verbose=false) {
+        if (verbose) { Serial.println("Running Lifter Unit Tests!"); }
+        lifter->moveDown();
+        if (verbose) { lifter->getStatus(verbose); }
+        delay(1000);
+        lifter->stop();
+        if (verbose) { lifter->getStatus(verbose); }
+        delay(5000);
     }
 
     /// Runs all defined unit tests in [TestController].

@@ -38,12 +38,12 @@ public:
         this->speed = 255;
         
         // Check if Bluetooth interface is initialized and ready.
-        if (this->bluetooth->getStatus() != "Ready") {
+        if (this->bluetooth->getStatus() != "ready") {
             const String error = "Bluetooth is not ready. Status: ";
             Serial.println(error);
             // throw error;
         }
-        status = "Ready";
+        status = "ready";
     }
 
     /// @brief Constuctor initializing the [BluetoothController] Class with lifter.
@@ -59,12 +59,12 @@ public:
         this->speed = 255;
         
         // Check if Bluetooth interface is initialized and ready.
-        if (this->bluetooth->getStatus() != "Ready") {
+        if (this->bluetooth->getStatus() != "ready") {
             const String error = "Bluetooth is not ready. Status: ";
             Serial.println(error);
             // throw error;
         }
-        status = "Ready";
+        status = "ready";
     }
 
     /// @brief One Step of the Robot when it is to be controlled over Bluetooth. This function is called
