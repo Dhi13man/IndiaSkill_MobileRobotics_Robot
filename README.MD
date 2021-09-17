@@ -28,7 +28,9 @@ The Robot's Hardware components associated with the project includes:
 
 ## Project Details
 
-1. **Main.cpp:** Main file for the project.
+1. **Main.cpp:** Main file for the project. Utilizes `ControlModes` enum to determine whether control needs to be done via Autonomous (`ControlModes::AUTONOMOUS`), Bluetooth(`ControlModes::BLUETOOTH`), Hybrid(`ControlModes::HYBRID`) or Test(`ControlModes::TEST`) mode using Switch cases.
+Then, required Interfaces and Controller is initialized and the robot is operated using the Controller methods accordingly.
+
 2. **interfaces:** Folder containing all the interfaces interfacing with the hardware.
    1. **2N_wheel_drive_interface.hpp:** Contains a `NDualWheelDriveInterface` Class which uses N `MotorDriverInterface` Classes (defined in `motordriver_interfaces.cpp`) objects to run the 2N wheeled bot, as needed.
 
