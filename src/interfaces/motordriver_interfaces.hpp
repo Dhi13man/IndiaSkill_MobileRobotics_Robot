@@ -31,11 +31,17 @@ public:
     /// @param speed Speed of the right motor. Range: 0-255. Default: 255
     virtual void rightMotorBackward(int speed) = 0;
 
+    // PRIMITIVE MOVEMENT -> Left Motor completely stopped. MUST be Overridden.
+    virtual void leftMotorStop() = 0;
+
+    // PRIMITIVE MOVEMENT -> Right Motor completely stopped. MUST be Overridden.
+    virtual void rightMotorStop() = 0;
+
     /// MOVEMENT FUNCTION --> Left
     /// @param speed Speed of the right motor. Range: 0-255. Default: 255
     virtual void smoothLeft(int speed) {
         rightMotorForward(speed);
-        leftMotorForward(0);
+        leftMotorStop();
         status = "smooth_left";
     }
 
@@ -43,7 +49,7 @@ public:
     /// @param speed Speed of the left motor. Range: 0-255. Default: 255
     virtual void smoothRight(int speed) {
         leftMotorForward(speed);
-        rightMotorForward(0);
+        rightMotorStop();
         status = "smooth_right";
     }
 
@@ -81,8 +87,8 @@ public:
 
     /// MOVEMENT FUNCTIONS --> Stop
     virtual void stop() {
-        leftMotorForward(0);
-        rightMotorForward(0);
+        leftMotorStop();
+        rightMotorStop();
         status = "stop";
     }
 
@@ -142,6 +148,18 @@ public:
         if (enr != -1) pinMode(enr, OUTPUT);
         // Status of Bot: Ready!
         status = "ready";
+    }
+
+    /// PRIMITIVE MOVEMENT -> Left Motor Stop.
+    void leftMotorStop() override {
+        digitalWrite(lmf, 0);
+        digitalWrite(lmb, 0);
+    }
+
+    /// PRIMITIVE MOVEMENT -> Right Motor Stop.
+    void rightMotorStop() override {
+        digitalWrite(rmf, 0);
+        digitalWrite(rmb, 0);
     }
 
     /// PRIMITIVE MOVEMENT -> Left Motor Forward

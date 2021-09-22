@@ -116,5 +116,6 @@ public:
     void runTests(bool verbose=false) {
         motorsTest(255, verbose);
         bluetoothTest(verbose);
+        lifterTest(verbose);
     }
 }; 

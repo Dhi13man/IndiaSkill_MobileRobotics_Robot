@@ -34,6 +34,13 @@ private:
     else return true;
     }
 
+    /// Hard coded autonomous logic to turn 180 degrees.
+    /// Will only work in the specific arena by the specific robot.
+    void turn180() {
+        fourWheelDrive->hardLeft(185);
+        delay(2450);
+        fourWheelDrive->stop();
+    }
 
 public:
     /// @brief Constuctor initializing the [AutonomousController] Class.
@@ -75,34 +82,86 @@ public:
         status = "ready";
     }
 
-    void lineFollow() {
-        if(isWhite(leftIRPin) && isWhite(rightIRPin))
-            fourWheelDrive->forward(150);
-        if(isWhite(leftIRPin) && !isWhite(rightIRPin))
-            fourWheelDrive->hardLeft(150);
-        if(!isWhite(leftIRPin) && isWhite(rightIRPin))
-            fourWheelDrive->hardRight(150);
-        if(!isWhite(leftIRPin) && !isWhite(rightIRPin))
+    /// @brief Most basic line following autonomous logic (taking on-spot turns)
+    void lineFollow(int speed) {
+        if(isWhite(leftIRPin) && isWhite(rightIRPin)) {
+            fourWheelDrive->forward(speed);
+        }
+        if(isWhite(leftIRPin) && !isWhite(rightIRPin)) {
+            fourWheelDrive->hardLeft(speed);
+        }
+        if(!isWhite(leftIRPin) && isWhite(rightIRPin)) {
+            fourWheelDrive->hardRight(speed);
+        }
+        if(!isWhite(leftIRPin) && !isWhite(rightIRPin)) {
             fourWheelDrive->stop();
+        }
     }
 
-    void step(bool verbose = false) {
-        if (millis() - init <= 4000) 
-            lineFollow();
+    /// @brief Most basic line following autonomous logic (taking smooth turns)
+    void lineFollowSmooth(int speed) {
+        if(isWhite(leftIRPin) && isWhite(rightIRPin)) {
+            fourWheelDrive->forward(speed);
+        }
+        if(isWhite(leftIRPin) && !isWhite(rightIRPin)) {
+            fourWheelDrive->smoothLeft(2*speed);
+        }
+        if(!isWhite(leftIRPin) && isWhite(rightIRPin)) {
+            fourWheelDrive->smoothRight(2*speed);
+        }
+        if(!isWhite(leftIRPin) && !isWhite(rightIRPin)) {
+            fourWheelDrive->stop();
+        }
+    }
+
+    /// @brief Specific arena based logic to perform first task
+    void step1(bool verbose = false) {
+        if (millis() - init <= 5000) 
+            lineFollow(140);
         else {
             if (!isWhite(rightIRPin)) {
                 fourWheelDrive->stop();
                 lifter->moveDown();
-                delay(2000);
+                delay(1020);
                 lifter->stop();
-                fourWheelDrive->forward(150);
-                delay(2000);
+                fourWheelDrive->forward(125);
+                delay(950);
                 fourWheelDrive->stop();
                 lifter->moveUp();
-                delay(4000);
+                delay(3000);
                 lifter->stop();
-                while (isWhite(rightIRPin)) fourWheelDrive->backward(150);
+                fourWheelDrive->backward(255);
+                delay(4200);
+                turn180();
+
+                // END PROCESS
+                while (true) fourWheelDrive->stop();
+            }   
+        }
+        if (verbose) fourWheelDrive->getStatus(true);
+    }
+
+    /// @brief Specific arena based logic to perform second task
+    void step2(bool verbose = false) {
+        if (millis() - init <= 15000) 
+            lineFollowSmooth(95);
+        else {
+            if (!isWhite(leftIRPin)) {
                 fourWheelDrive->stop();
+                lifter->moveDown();
+                delay(1020);
+                lifter->stop();
+                fourWheelDrive->forward(125);
+                delay(950);
+                fourWheelDrive->stop();
+                lifter->moveUp();
+                delay(3000);
+                lifter->stop();
+                fourWheelDrive->backward(255);
+                delay(4200);
+
+                // END PROCESS
+                while (true) fourWheelDrive->stop();
             }   
         }
         if (verbose) fourWheelDrive->getStatus(true);
