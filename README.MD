@@ -62,3 +62,11 @@ The libraries and external dependencies used to quickly make this project happen
     This is an open source project. Feel free to use, modify and distribute the entirety, or any part of the code either on its own, or as a template.
 
 Would love to be credited [@dhi13man](https://www.github.com/dhi13man) though. :)
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+See [LICENSE](LICENSE).
